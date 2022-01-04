@@ -1,0 +1,43 @@
+---
+title: "Lab 1_2 HW"
+author: "Natalie Rizzo"
+date: "1/4/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Attempting Homework Lab 1, attempt 1
+
+The difference between R and R studio is that R is the coding language being used and R studio is an easy way to code the language. Github is a place to store written code and share it with other users. It is useful as a resource for everyone and can allow you to integrate building block chunks of code into your own.
+```{r}
+5-3*2
+```
+```{r}
+8/2**2
+```
+```{r}
+(5-3)*2
+```
+```{r}
+(8/2)**2
+```
+```{r}
+pi <- 3.14159265359
+```
+```{r}
+pi*2
+```
+```{r}
+x <- c(2,8,6,6,7,4,9,9,9,10)
+```
+```{r}
+mean(x)
+```
+```{r}
+median(x)
+```
+
+
