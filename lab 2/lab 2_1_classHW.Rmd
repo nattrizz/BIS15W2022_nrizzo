@@ -1,0 +1,86 @@
+---
+title: "Lab 2_1_HW"
+author: "Natalie Rizzo"
+date: "1/6/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+venom_GT <-270
+```
+```{r}
+chiron <- 261
+```
+```{r}
+veyron <- 268
+```
+```{r}
+mean (venom_GT,chiron,veyron)
+```
+```{r}
+mean(270,261,268)
+```
+```{r}
+x= c(270,261,268)
+```
+```{r}
+mean(x)
+```
+```{r}
+y= c(venom_GT, chiron, veyron)
+```
+```{r}
+mean(y)
+```
+```{r}
+class(y)
+```
+```{r}
+my_numeric <-42
+my_integer <-2L
+my_character <- "universe"
+my_logical <- FALSE
+my_complex <- 2+4i
+```
+
+```{r}
+class(my_numeric)
+```
+```{r}
+is(my_numeric)
+```
+```{r}
+is.integer(my_numeric)
+```
+```{r}
+my_numeric <-as.integer(my_numeric)
+```
+```{r}
+is.integer(my_integer)
+```
+```{r}
+is.na(my_numeric)
+```
+```{r}
+my_missing <-NA
+```
+```{r}
+is.na(my_missing)
+```
+
+```{r}
+new_vector <- c(7, 6.2, 5, 9, NA, 4, 9.8, 7, 3, 2)
+```
+
+```{r}
+mean(new_vector)
+```
+
+```{r}
+mean(new_vector, na.rm = T)
+```
+

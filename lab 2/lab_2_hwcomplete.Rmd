@@ -1,0 +1,85 @@
+---
+title: "Lab_2_HW"
+author: "Natalie Rizzo"
+date: "1/11/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. Vectors in R are data sets that you input and can be used to build up further uses of the data.
+2. Data matrices are sets of vectors used to portray collected data.
+```{r}
+spring_1 <- c(36.25, 35.40, 35.30)
+spring_2 <- c(35.15, 35.35, 33.35)
+spring_3 <- c(30.70, 29.65, 29.20)
+spring_4 <- c(39.70, 40.05, 38.65)
+spring_5 <- c(31.85, 31.40, 29.30)
+spring_6 <- c(30.20, 30.65, 29.75)
+spring_7 <- c(32.90, 32.50, 32.80)
+spring_8 <- c(36.80, 36.45, 33.15)
+```
+```{r}
+hot_springs <- c(spring_1, spring_2, spring_3, spring_4, spring_5, spring_6, spring_7, spring_8)
+hot_springs
+```
+```{r}
+hot_springs_matrix <- matrix(hot_springs, nrow = 8, byrow=T)
+hot_springs_matrix
+```
+```{r}
+scientists <- c("Jill","Steve","Susan")
+scientists
+```
+```{r}
+springs <- c("Bluebell Spring", "Opal Spring", "Riverside Spring", "Too Hot Spring", "Mystery Spring", "Emerald Spring", "Black Spring", "Pearl Spring")
+springs
+```
+```{r}
+colnames(hot_springs_matrix) <- scientists
+```
+```{r}
+rownames(hot_springs_matrix) <- springs
+```
+```{r}
+print(hot_springs_matrix)
+```
+```{r}
+mean(hot_springs_matrix)
+```
+```{r}
+rowMeans(hot_springs_matrix)
+```
+```{r}
+Spring_Average <- rowMeans(hot_springs_matrix)
+Spring_Average
+```
+```{r}
+all_hot_springs <- cbind(hot_springs_matrix, Spring_Average)
+all_hot_springs
+```
+```{r}
+hot_springs_matrix [2,3]
+```
+```{r}
+jill_mean_temp <- all_hot_springs[ ,1]
+jill_mean_temp
+```
+```{r}
+mean(jill_mean_temp)
+```
+```{r}
+steve_high <- all_hot_springs[ ,2]
+```
+```{r}
+max(steve_high)
+```
+
+
+
+
+
+
+
