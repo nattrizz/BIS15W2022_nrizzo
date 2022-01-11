@@ -1,0 +1,85 @@
+---
+title: "Lab_3_Hwcomplete"
+author: "Natalie Rizzo"
+date: "1/11/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(tidyverse)
+```
+```{r}
+getwd()
+```
+```{r}
+summary(msleep)
+```
+```{r}
+help(msleep)
+```
+This data is taken from the National Academy of Sciences.
+```{r}
+sleep <- data.frame(msleep)
+```
+```{r}
+dim(sleep)
+```
+The dimemsions are 83 rows and 11 columns. 
+```{r}
+anyNA(sleep)
+```
+There are NAs in this data set. 
+```{r}
+colnames(sleep)
+```
+```{r}
+table(sleep$vore)
+```
+There are 32 herbivores in this data.
+```{r}
+small_mammals <- subset(sleep, bodywt<=1)
+small_mammals
+```
+```{r}
+large_mammals <- subset(sleep, bodywt>=200)
+large_mammals
+```
+```{r}
+small_average <- small_mammals[ ,11]
+small_average
+```
+```{r}
+mean(small_average)
+```
+```{r}
+large_average <- large_mammals [ ,11]
+large_average
+```
+```{r}
+mean(large_average)
+```
+```{r}
+small_sleep_avg <- small_mammals[ ,6]
+```
+```{r}
+mean(small_sleep_avg)
+```
+```{r}
+large_sleep_avg <- large_mammals [ ,6]
+```
+
+```{r}
+mean(large_sleep_avg)
+```
+Smaller animals sleep longer than larger animals.
+```{r}
+max(small_mammals[ ,6])
+```
+```{r}
+max(large_mammals[ ,6])
+```
+The little brown bat is the sleepiest.
+

@@ -76,6 +76,9 @@ steve_high <- all_hot_springs[ ,2]
 ```{r}
 max(steve_high)
 ```
+```{r}
+getwd()
+```
 
 
 
