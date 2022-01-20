@@ -1,0 +1,63 @@
+---
+title: "lab_4_hw"
+author: "Natalie Rizzo"
+date: "1/18/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+homerange <- readr::read_csv("data/Tamburelloetal_HomeRangeDatabase.csv")
+```
+```{r}
+homerange
+```
+
+```{r}
+colnames(homerange)
+```
+
+```{r}
+glimpse(homerange)
+```
+
+```{r}
+str(homerange)
+```
+```{r}
+colnames(homerange)
+```
+
+```{r}
+select_if(homerange, ~!is.numeric(.))
+```
+```{r}
+homerange$taxon <- as.factor(homerange$taxon)
+```
+```{r}
+homerange$order <- as.factor(homerange$order)
+```
+```{r}
+taxa <- select(homerange, contains("taxon, common name, class, order, family, genus, species"))
+```
+```{r}
+taxa
+```
+```{r}
+
+```
+
+
+
+
+
+
+
+
