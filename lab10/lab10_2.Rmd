@@ -129,19 +129,25 @@ homerange %>%
 
 ## Practice
 For this practice, let's use the [palmerpenguins](https://allisonhorst.github.io/palmerpenguins/articles/intro.html) data.  
+```{r}
+names(penguins)
+```
 
 1. Make a bar plot that shows counts of individuals by island. Fill by species, and try both a stacked bar plot and `position="dodge"`.
 ```{r}
-
+penguins %>% 
+  ggplot(aes(x=island, fill=species))+geom_bar()+coord_flip()
 ```
 
 ```{r}
-
+penguins %>% 
+  ggplot(aes(x=island, fill=species))+geom_bar(position = "dodge")+coord_flip()
 ```
 
 2. What are the number of individuals separated by sex on each island?
 ```{r}
-
+penguins %>% 
+  ggplot(aes(x=island, fill=sex))+geom_bar()+coord_flip()
 ```
 
 ## Using `group`
