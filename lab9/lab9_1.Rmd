@@ -77,7 +77,7 @@ ggplot(data=iris, mapping=aes(x=Species, y=Petal.Length))+geom_boxplot()
 ## Practice
 1. Use the iris data to build a scatterplot that compares sepal length vs. sepal width. Use the cheat sheet or help to find the correct `geom_` for a scatterplot.
 ```{r}
-
+ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Sepal.Width))+geom_point()
 ```
 
 ```{r}
@@ -99,11 +99,11 @@ homerange <- read_csv(here("lab9", "data", "Tamburelloetal_HomeRangeDatabase.csv
 ## Practice
 1. What is the structure of the `homerange` data? Does it have any NA's? Is it tidy? Do a quick exploratory analysis of your choice below.
 ```{r}
-
+glimpse(homerange)
 ```
 
 ```{r}
-
+naniar::miss_var_summary(homerange)
 ```
 
 
@@ -131,10 +131,11 @@ ggplot(data=homerange, mapping=aes(x=log10.mass, y=log10.hra)) +
   geom_point()+
   geom_smooth(method=lm, se=T) #adds the regression line, `se=TRUE` will add standard error
 ```
-
+#ggplot(data = homerange, mapping = aes(x = log10.mass, y = log10.hra)) + geom_point()
 ### Practice
 1. What is the relationship between log10.hra and log10.preymass? What do you notice about how ggplot treats NA's?
 ```{r}
+ggplot(data = homerange, mapping = aes(x = log10.hra, y= log10.preymass))+geom_point(na.rm=T)+geom_smooth(method=lm,se=T)
 
 ```
 
@@ -191,11 +192,13 @@ homerange %>%
 ## Practice
 1. Filter the `homerange` data to include `mammals` only.
 ```{r}
-
+names(homerange)
 ```
 
 ```{r}
-
+hr_mammals <- homerange %>% 
+  filter(class=="mammalia")
+hr_mammals
 ```
 
 ```{r}
@@ -205,21 +208,28 @@ homerange %>%
 
 2. Are there more herbivores or carnivores in mammals? Make a bar plot that shows their relative numbers.
 ```{r}
-
+hr_mammals %>% 
+  select(common.name, trophic.guild) %>% 
+  count(trophic.guild)
 ```
 
 ```{r}
-
+hr_mammals %>% 
+  ggplot(aes(x=trophic.guild))+geom_bar()
 ```
 
 
 3. Make a bar plot that shows the masses of the top 10 smallest mammals.
 ```{r}
-
+hr_mammals %>% 
+  top_n(-10, mean.mass.g) %>% 
+  ggplot(aes(x=mean.mass.g, y=species))+geom_col()
 ```
 
 ```{r}
-
+hr_mammals %>% 
+  top_n(-10, log10.mass) %>% 
+  ggplot(aes(x=common.name, y =log10.mass))+geom_col()+coord_flip()
 ```
 
 ```{r}
