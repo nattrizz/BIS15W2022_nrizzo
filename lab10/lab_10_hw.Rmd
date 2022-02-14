@@ -146,6 +146,12 @@ deserts %>%
 ```{r}
 deserts %>% 
   filter(species=="albigula"|species=="spectabilis") %>% 
+  
+```
+
+```{r}
+deserts %>% 
+  filter(species=="albigula"|species=="spectabilis") %>% 
   ggplot(aes(x=weight, y=hindfoot_length))+geom_point(aes(shape=sex, color=sex, na.rm = T))
 ```
 ```{r}

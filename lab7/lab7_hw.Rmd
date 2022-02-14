@@ -1,6 +1,6 @@
 ---
 title: "Lab 7 Homework"
-author: "Joel Ledford"
+author: "Natalie Rizzo"
 date: "`r Sys.Date()`"
 output:
   html_document: 
@@ -109,9 +109,6 @@ amphib %>%
 **10. Now that we know how NA's are represented in the `amniota` data, how would you load the data such that the values which represent NA's are automatically converted?**
 ```{r}
 amniota_adv <- readr::read_csv(file= "data/amniota.csv", na = c("NA", "-999"))
-```
-```{r}
-any_na(amniota_adv)
 ```
 
 ## Push your final code to GitHub!
