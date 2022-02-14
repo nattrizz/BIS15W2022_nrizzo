@@ -1,6 +1,6 @@
 ---
 title: "Lab 11 Homework"
-author: "Please Add Your Name Here"
+author: "Natalie Rizzo"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -33,7 +33,7 @@ The idea for this assignment came from [Rebecca Barter's](http://www.rebeccabart
 ## Gapminder
 For this assignment, we are going to use the dataset [gapminder](https://cran.r-project.org/web/packages/gapminder/index.html). Gapminder includes information about economics, population, and life expectancy from countries all over the world. You will need to install it before use. This is the same data that we will use for midterm 2 so this is good practice.
 ```{r}
-#install.packages("gapminder")
+install.packages("gapminder")
 library("gapminder")
 ```
 
@@ -41,18 +41,82 @@ library("gapminder")
 The questions below are open-ended and have many possible solutions. Your approach should, where appropriate, include numerical summaries and visuals. Be creative; assume you are building an analysis that you would ultimately present to an audience of stakeholders. Feel free to try out different `geoms` if they more clearly present your results.  
 
 **1. Use the function(s) of your choice to get an idea of the overall structure of the data frame, including its dimensions, column names, variable classes, etc. As part of this, determine how NA's are treated in the data.**  
+```{r}
+gapminder<-
+gapminder::gapminder
+```
+
+```{r}
+glimpse(gapminder)
+```
 
 **2. Among the interesting variables in gapminder is life expectancy. How has global life expectancy changed between 1952 and 2007?**
+```{r}
+gapminder %>% 
+  group_by(year) %>% 
+  summarise(mean_life=mean(lifeExp)) %>% 
+  ggplot(aes(x=year, y=mean_life))+geom_point()+labs(title = "Global Life Expectancy Over the Years 1957-2007")+theme_clean()
+```
+```{r}
+gapminder$year<-as.factor(gapminder$year)
+gapminder
+```
 
 **3. How do the distributions of life expectancy compare for the years 1952 and 2007?**
+```{r}
+gapminder %>% 
+  group_by(year) %>% 
+  filter(year=="1952"|year=="2007") %>% 
+  summarise(mean_lifeex=mean(lifeExp)) %>% 
+  ggplot(aes(x=year, y=mean_lifeex, fill=mean_lifeex))+geom_col()+labs(title = "Global Mean Life Expectancy in 1952 versus 2007", x="Year", y="Mean Life (years)")
+```
 
 **4. Your answer above doesn't tell the whole story since life expectancy varies by region. Make a summary that shows the min, mean, and max life expectancy by continent for all years represented in the data.**
+```{r}
+num_life<-
+gapminder %>%
+  group_by(continent) %>% 
+  summarise(min_life=min(lifeExp), max_life=max(lifeExp), mean_life=mean(lifeExp)) 
+num_life
+```
+```{r}
+a<-
+gapminder %>%
+  group_by(continent) %>% 
+  summarise(min_life=min(lifeExp), max_life=max(lifeExp), mean_life=mean(lifeExp)) %>% 
+  ggplot(aes(x=continent, y=min_life, fill=mean_life))+geom_col(position = position_dodge())
+a
+```
+```{r}
+a+facet_wrap(~continent)
+```
+
 
 **5. How has life expectancy changed between 1952-2007 for each continent?**
+```{r}
+gapminder %>% 
+  group_by(year, continent) %>% 
+  summarise(mean_life=mean(lifeExp)) %>% 
+  ggplot(aes(x=year, y=mean_life, color=continent))+geom_point()+labs(title = "Life Expectancy Over the Years 1957-2007")+theme_clean()
+```
+```{r}
+names(gapminder)
+```
 
 **6. We are interested in the relationship between per capita GDP and life expectancy; i.e. does having more money help you live longer?**
+```{r}
+gapminder %>%
+  group_by(continent) %>% 
+  ggplot(aes(x=gdpPercap, y=lifeExp, color=continent))+geom_point()+geom_jitter()+labs(title = "Life Expectancy in Terms of GDP per Capita")
+```
 
 **7. Which countries have had the largest population growth since 1952?**
+```{r}
+gapminder %>%
+  group_by(country) %>% 
+  summarise(range_pop=range(pop)) %>% 
+  arrange(desc(range_pop))
+```
 
 **8. Use your results from the question above to plot population growth for the top five countries since 1952.**
 
