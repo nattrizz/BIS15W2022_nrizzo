@@ -119,10 +119,25 @@ gapminder %>%
 ```
 
 **8. Use your results from the question above to plot population growth for the top five countries since 1952.**
+```{r}
+gapminder %>%
+  filter(country=="China"| country=="India"| country=="United States"|country=="Indonesia"| country=="Brazil") %>% 
+  ggplot(aes(x=year, y=pop, color=country))+geom_line()+labs(title = "Top 5 Population Growth Countries from 1952-2002")
+```
 
 **9. How does per-capita GDP growth compare between these same five countries?**
+```{r}
+gdp<-
+gapminder %>%
+  filter(country=="China"| country=="India"| country=="United States"|country=="Indonesia"| country=="Brazil") %>% 
+  ggplot(aes(x=year, y=gdpPercap, color=country))+geom_line()+labs(title = "Top 5 Population Growth Countries from 1952-2002")
+gdp
+```
 
 **10. Make one plot of your choice that uses faceting!**
+```{r}
+gdp+facet_wrap()
+```
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences. 
