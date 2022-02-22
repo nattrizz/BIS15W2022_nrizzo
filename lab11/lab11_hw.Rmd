@@ -1,4 +1,4 @@
----
+ ---
 title: "Lab 11 Homework"
 author: "Natalie Rizzo"
 date: "`r Sys.Date()`"
@@ -80,6 +80,14 @@ gapminder %>%
 num_life
 ```
 ```{r}
+gapminder %>%
+  group_by(year, continent) %>% 
+  summarise(mean_life=mean(lifeExp)) %>% 
+  ggplot(aes(x=year, y=mean_life, color=continent))+geom_point()
+```
+
+
+```{r}
 a<-
 gapminder %>%
   group_by(continent) %>% 
@@ -138,6 +146,3 @@ gdp
 ```{r}
 gdp+facet_wrap()
 ```
-
-## Push your final code to GitHub!
-Please be sure that you check the `keep md` file in the knit preferences. 

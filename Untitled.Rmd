@@ -1,0 +1,45 @@
+---
+title: "pH Data"
+author: "Natalie Rizzo"
+date: "2/15/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(tidyverse)
+library(RColorBrewer)
+library(paletteer)
+library(janitor)
+library(here)
+```
+```{r}
+install.packages("lubridate")
+```
+
+```{r}
+ph<-
+readr::read_csv("pHdata.csv")
+ph
+```
+```{r}
+glimpse(ph)
+```
+```{r}
+janitor::clean_names(ph)
+```
+```{r}
+ph %>% 
+  summarise(min_cg76=min(`Cg pH 7.6`),max_cg76=max(`Cg pH 7.6`),mean_cg76=mean(`Cg pH 7.6`),sd_cg76=sd(`Cg pH 7.6`),
+            min_cg82=min(`Cg pH 8.2`),max_cg82=max(`Cg pH 8.2`),mean_cg82=mean(`Cg pH 8.2`),sd_cg82=sd(`Cg pH 8.2`),
+            min_na76=min(`Nanno pH 7.6`),max_cg82=max(`Nanno pH 7.6`),mean_cg82=mean(`Nanno pH 7.6`),sd_n76=sd(`Nanno pH 7.6`),
+            min_na82=min(`Nanno pH 8.2`),max_cg82=max(`Nanno pH 8.2`),mean_cg82=mean(`Nanno pH 8.2`),sd_n82=sd(`Nanno pH 8.2`))
+```
+```{r}
+ph %>% 
+  ggplot(aes(x=`Relative Time`, y=`Cg pH 7.6'))+geom_line()
+```
+
+
