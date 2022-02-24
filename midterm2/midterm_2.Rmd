@@ -11,6 +11,16 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+#install.packages("jsonlite")
+library(jsonlite)
+```
+
+```{r}
+library(tidyverse)
+```
+
+
 ## Instructions
 Answer the following questions and complete the exercises in RMarkdown. Please embed all of your code and push your final work to your repository. Your code should be organized, clean, and run free from errors. Be sure to **add your name** to the author header above. You may use any resources to answer these questions (including each other), but you may not post questions to Open Stacks or external help sites. There are 10 total questions.  
 
@@ -32,6 +42,7 @@ library(janitor)
 library(here)
 library(skimr)
 ```
+
 ```{r}
 life<- read_csv("data/life_expectancy_years.csv")
 ```
@@ -128,7 +139,7 @@ life %>%
 life_long %>% 
   filter(country=="Kuwait") %>% 
   filter(year>="1920", year<="2020") %>% 
-  ggplot(aes(x=year, y=lifeEx,group=1))+geom_line()+labs(title = "Life Expectancy in Kuwait 1920-2020")
+  ggplot(aes(x=as.numeric(year), y=lifeEx,group=1))+geom_line()+labs(title = "Life Expectancy in Kuwait 1920-2020")
 ```
 6. (3 points) Which 5 countries have had the highest population growth over the past 100 years (1920-2020)?  
 ```{r}
@@ -198,6 +209,5 @@ gapminder_join
 ```{r}
 income_100 %>%
   filter(country=="Germany"| country=="Japan"| country=="Australia") %>% 
-  ggplot(aes(x=as.numeric(year), y=income, color=country))+geom_density()+facet_grid(.~population)+labs(title = "GDP Growth over 1920-2020")
+  ggplot(aes(x=as.numeric(year), y=income, color=country, group=1))+geom_line()+facet_wrap(~country)+labs(title = "GDP Growth over 1920-2020")
 ```
-
