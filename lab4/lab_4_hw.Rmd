@@ -3,7 +3,9 @@ title: "lab_4_hw"
 author: "Natalie Rizzo"
 date: "1/18/2022"
 output: html_document
+keep_md: yes
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -50,14 +52,3 @@ taxa <- select(homerange, contains("taxon, common name, class, order, family, ge
 ```{r}
 taxa
 ```
-```{r}
-
-```
-
-
-
-
-
-
-
-

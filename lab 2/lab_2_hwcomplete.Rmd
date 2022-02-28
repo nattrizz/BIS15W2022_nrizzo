@@ -3,6 +3,7 @@ title: "Lab_2_HW"
 author: "Natalie Rizzo"
 date: "1/11/2022"
 output: html_document
+keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -76,13 +77,3 @@ steve_high <- all_hot_springs[ ,2]
 ```{r}
 max(steve_high)
 ```
-```{r}
-getwd()
-```
-
-
-
-
-
-
-
