@@ -3,6 +3,7 @@ title: "Lab_10_hw"
 author: "Natalie Rizzo"
 date: "2/9/2022"
 output: html_document
+keep_md: yes
 ---
 
 ```{r setup, include=FALSE}

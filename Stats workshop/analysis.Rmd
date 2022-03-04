@@ -1,0 +1,129 @@
+---
+title: "workshop"
+author: "Natalie Rizzo"
+date: "2/28/2022"
+output: html_document
+keep_md: yes
+
+---
+#multi-factor analysis
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+datum_mv<-read.csv("5_ANCOVA.csv")
+```
+```{r}
+head(datum_mv)
+```
+
+```{r}
+lm(Mass~Protein+Supplement, data= datum_mv)
+```
+```{r}
+plot(Mass~Protein+Supplement, data=datum_mv)
+```
+```{r}
+results<-lm(Mass~as.factor(Protein)+Supplement, data=datum_mv)
+summary(results)
+```
+```{r}
+TukeyHSD(aov(results))
+```
+```{r}
+anova(results)
+```
+#type III sum of squares - full model compared to model without the variable, or marginal sum of squares
+#type I sum of squares - sequential sum of squares, compares model with the variable to model with all variables before it, order of listed parameters matters...usually not used unless every protein is crossed with every supplement, if there is no co-linearity between the data you could use this
+```{r}
+summary(results)
+```
+#Interaction is when the 'effect' of one variable depends on the value of another x variable
+#birth control pill - x=pill/placebo, y=output, x=sex
+--- y= B0 +B1Pill + B2Sex + B3Sex*Pill
+Rules for interactions
+1. don't include it without good reason
+2. if not significant, take it out
+3. if significant, break apart your model
+
+```{r}
+results= lm(Mass~Protein+Supplement+Protein:Supplement, data=datum_mv)
+results= lm(Mass~Protein*Supplement, data = datum_mv)
+summary(results)
+```
+```{r}
+datum2= read.csv(file.choose())
+```
+```{r}
+plot(Mass~Protein, data = datum2)
+```
+```{r}
+results2<- lm(Mass~Protein*Supplement, data=datum2)
+summary(results2)
+```
+```{r}
+results3<- lm(Mass~Protein, data = datum2, subset = c(Supplement=="No"))
+summary(results3)
+```
+```{r}
+lm(Mass~Protein, data = datum2, subset = c(Supplement=="Yes")) %>% 
+  summary()
+```
+```{r}
+lm(Mass~as.factor(Protein)*Supplement, data = datum2) %>% 
+  summary()
+```
+```{r}
+results3<- lm(Mass~as.factor(Protein), data = datum2, subset = c(Supplement=="Yes"))
+summary(results3)
+```
+```{r}
+install.packages("emmeans")
+```
+```{r}
+library(emmeans)
+```
+```{r}
+emm<- emmeans(results, specs=~as.factor(Protein)*Supplement)
+emm
+```
+```{r}
+plot(emm)
+```
+```{r}
+plot(emm)
+emmip(results, Supplement~as.factor(Protein)) +labs(title="Protein Diets Growth with or without Supplement")
+```
+```{r}
+tank<- read.csv("Stats workshop/7_MixedANOVA.csv")
+```
+```{r}
+head(tank)
+```
+```{r}
+redults<-lm(Mass~as.factor(Protein), data=tank)
+summary(redults)
+```
+```{r}
+plot(Mass~as.factor(Protein), data=tank)
+```
+```{r}
+redults2<- lm(Mass~as.factor(Protein), data=tank, random=~1|Tank)
+```
+```{r}
+nested<- read.csv("Stats workshop/8_NestedAncova.csv")
+```
+
+```{r}
+head(nested)
+```
+```{r}
+nestresults<- lm(Size~Age+Sex, data=nested)
+summary(nestresults)
+```
+```{r}
+lme(Size~Age, data=nested, random=~1|Individual)
+```
+#adding in a correlation structure - cor=corAR1()
