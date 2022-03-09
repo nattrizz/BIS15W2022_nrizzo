@@ -26,6 +26,7 @@ library(tidyverse)
 library(janitor)
 library(here)
 library(naniar)
+library("gapminder")
 ``` 
 
 ## Resources
@@ -33,10 +34,6 @@ The idea for this assignment came from [Rebecca Barter's](http://www.rebeccabart
 
 ## Gapminder
 For this assignment, we are going to use the dataset [gapminder](https://cran.r-project.org/web/packages/gapminder/index.html). Gapminder includes information about economics, population, and life expectancy from countries all over the world. You will need to install it before use. This is the same data that we will use for midterm 2 so this is good practice.
-```{r}
-install.packages("gapminder")
-library("gapminder")
-```
 
 ## Questions
 The questions below are open-ended and have many possible solutions. Your approach should, where appropriate, include numerical summaries and visuals. Be creative; assume you are building an analysis that you would ultimately present to an audience of stakeholders. Feel free to try out different `geoms` if they more clearly present your results.  
@@ -56,7 +53,7 @@ glimpse(gapminder)
 gapminder %>% 
   group_by(year) %>% 
   summarise(mean_life=mean(lifeExp)) %>% 
-  ggplot(aes(x=year, y=mean_life))+geom_point()+labs(title = "Global Life Expectancy Over the Years 1957-2007")+theme_clean()
+  ggplot(aes(x=year, y=mean_life))+geom_point()+labs(title = "Global Life Expectancy Over the Years 1957-2007")
 ```
 ```{r}
 gapminder$year<-as.factor(gapminder$year)
@@ -106,7 +103,7 @@ a+facet_wrap(~continent)
 gapminder %>% 
   group_by(year, continent) %>% 
   summarise(mean_life=mean(lifeExp)) %>% 
-  ggplot(aes(x=year, y=mean_life, color=continent))+geom_point()+labs(title = "Life Expectancy Over the Years 1957-2007")+theme_clean()
+  ggplot(aes(x=year, y=mean_life, color=continent))+geom_point()+labs(title = "Life Expectancy Over the Years 1957-2007")
 ```
 ```{r}
 names(gapminder)
@@ -139,11 +136,11 @@ gapminder %>%
 gdp<-
 gapminder %>%
   filter(country=="China"| country=="India"| country=="United States"|country=="Indonesia"| country=="Brazil") %>% 
-  ggplot(aes(x=year, y=gdpPercap, color=country))+geom_line()+labs(title = "Top 5 Population Growth Countries from 1952-2002")
+  ggplot(aes(x=year, y=gdpPercap, group=country, color=country))+geom_line()+labs(title = "Top 5 GDP Growth Countries from 1952-2002")
 gdp
 ```
 
 **10. Make one plot of your choice that uses faceting!**
 ```{r}
-gdp+facet_wrap()
+gdp+facet_grid(country~.)
 ```

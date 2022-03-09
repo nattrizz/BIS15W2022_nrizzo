@@ -2,22 +2,9 @@
 title: "Lab_10_hw"
 author: "Natalie Rizzo"
 date: "2/9/2022"
-output: html_document
-keep_md: yes
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
----
-title: "Lab 10 Homework"
-author: "Natalie Rizzo"
-date: "`r Sys.Date()`"
-output:
+output: 
   html_document:
-    theme: spacelab
-    toc: no
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -146,7 +133,7 @@ deserts %>%
 ```
 ```{r}
 deserts %>% 
-  filter(species=="albigula"|species=="spectabilis") %>% 
+  filter(species=="albigula"|species=="spectabilis") 
   
 ```
 
