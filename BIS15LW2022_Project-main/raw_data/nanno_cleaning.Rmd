@@ -1,0 +1,90 @@
+---
+title: "nanno cleaning"
+author: "Natalie Rizzo"
+date: "3/8/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+library(lubridate)
+```
+
+```{r}
+nanno_1<-readr::read_csv("raw_data/ph_nanno_set_1.csv")
+```
+```{r}
+nanno_2<-readr::read_csv("raw_data/ph_nanno_set_2.csv")
+```
+```{r}
+nanno_1<-clean_names(nanno_1)
+```
+
+```{r}
+glimpse(nanno_1)
+```
+```{r}
+nanno_1%>%
+  select(-c(x10))
+```
+```{r}
+nanno_1<-nanno_1 %>% 
+rename(ph1_7_6 = ph_7_6_2,
+       ph1_8_2 = ph_8_2_3,
+       ph2_7_6 = ph_7_6_4,
+       ph2_8_2 = ph_8_2_5,
+       ph3_8_2 = ph_8_2_6, 
+       ph3_7_6 = ph_7_6_7)
+```
+```{r}
+nanno_1
+```
+```{r}
+glimpse(nanno_1)
+```
+
+```{r}
+nanno_1
+```
+`
+```{r}
+nanno_1<-nanno_1[,c(1,2,4,7,3,5,6)]
+```
+```{r}
+nanno_1
+```
+```{r}
+nanno_2
+```
+```{r}
+nanno_2<-clean_names(nanno_2)
+```
+```{r}
+nanno_2<-nanno_2 %>% 
+rename(ph1_7_6 = ph_7_6_2,
+       ph1_8_2 = ph_8_2_4,
+       ph2_7_6 = ph_7_6_3,
+       ph2_8_2 = ph_8_2_6,
+       ph3_8_2 = ph_8_2_7, 
+       ph3_7_6 = ph_7_6_5)
+```
+```{r}
+nanno_2
+```
+```{r}
+nanno_2 %>% 
+  select(-c(x8))
+```
+```{r}
+nanno_2<-nanno_2[,c(1,2,3,5,4,6,7)]
+```
+```{r}
+nanno_2
+```
